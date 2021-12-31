@@ -1,12 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, KeyboardAvoidingView, SafeAreaView, Platform } from 'react-native';
+import React from 'react';
 
 export default function App() {
+  const [inputValue, setInputValue] = React.useState("");
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+        <Text>Hi there, enter some text below:</Text>
+        <TextInput style={styles.input} value={inputValue} onChangeText={setInputValue} placeholder='Enter text here' />
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
@@ -17,4 +20,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  input: {
+    borderBottomColor: "green",
+    borderBottomWidth: 2,
+    alignSelf: "stretch",
+    margin: 16,
+    padding: 8
+  }
 });
